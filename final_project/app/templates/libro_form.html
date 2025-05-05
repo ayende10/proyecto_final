@@ -1,0 +1,54 @@
+{% extends "layout.html" %} {% block title %}{{ editar and "Edit Book" or "New
+Book" }}{% endblock %} {% block content %}
+<h2 class="mb-4">{{ editar and "Edit Course" or "New Course" }}</h2>
+
+<form method="POST" novalidate>
+  {{ form.hidden_tag() }}
+
+  <!-- Book Title -->
+  <div class="mb-3">
+    {{ form.titulo.label(class="form-label") }} {{
+    form.titulo(class="form-control", placeholder="Enter the book's title") }}
+  </div>
+
+  <!-- Book Author -->
+  <div class="mb-3">
+    {{ form.autor.label(class="form-label") }} {{
+    form.autor(class="form-control", placeholder="Enter the book's author") }}
+  </div>
+    
+   <!-- Book's ISBN -->
+   <div class="mb-3">
+    {{ form.isbn.label(class="form-label") }} {{
+    form.isbn(class="form-control", placeholder="Enter the book's ISBN") }}
+  </div>
+
+  <!-- Book Category -->
+  <div class="mb-3">
+    {{ form.categoria.label(class="form-label") }} {{
+    form.categoria(class="form-control", placeholder="Enter the book's category") }}
+  </div>
+
+  <!-- Book Description -->
+  <div class="mb-3">
+    {{ form.descripcion.label(class="form-label") }} {{
+    form.descripcion(class="form-control", placeholder="Enter book
+    description") }}
+  </div>
+
+  <!-- Book Status -->
+  <div class="mb-3">
+    {{ form.estado.label(class="form-label") }} {{
+    form.estado(class="form-control", placeholder="Enter the book's status (Available or Unavailable)") }}
+  </div>
+
+  <!-- Book Published -->
+  <div class="mb-3">
+    {{ form.publicacion.label(class="form-label") }} {{
+    form.publicacion(class="form-control", placeholder="Enter the book's published year") }}
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mb-3">{{ form.submit(class="btn btn-primary") }}</div>
+</form>
+{% endblock %}

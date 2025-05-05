@@ -1,26 +1,24 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 # Formulario para login de usuario
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     submit = SubmitField('Login')
 
 # Formulario para registrar un nuevo usuario
 class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired(), Length(min=3)])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password')])
-    
+
     role = SelectField(
         'Role',
-        choices=[('Student', 'Student'), ('Professor', 'Professor')],
-        validators=[DataRequired()]
-    )
-
+        choices=[('Lector', 'Lector'), ('Bibliotecario', 'Bibliotecario')],
+        validators=[DataRequired()])
     submit = SubmitField('Register')
 
 # Formulario para cambiar la contraseña del usuario
@@ -30,8 +28,13 @@ class ChangePasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm new password', validators=[DataRequired(), EqualTo('new_password')])
     submit = SubmitField('Update Password')
 
-# Formulario para crear o editar un curso
-class CursoForm(FlaskForm):
-    titulo = StringField('Course title', validators=[DataRequired()])
+# Formulario para crear o editar un libro
+class LibroForm(FlaskForm):
+    titulo = StringField('Book title', validators=[DataRequired()])
+    autor = StringField('Author name', validators=[DataRequired()])
+    categoria = StringField('Book category', validators=[DataRequired()])
+    estado = SelectField('Status',choices=[('Disponible', 'Disponible'), ('No Disponible', 'No Disponible')],validators=[DataRequired()] )
+    isbn = StringField('Book ISBN', validators=[DataRequired()])
+    anio_publicacion = IntegerField('Publication Year', validators=[DataRequired()])
     descripcion = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Save')

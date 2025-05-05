@@ -12,11 +12,21 @@ content %}
   </thead>
   <tbody>
     {% for usuario in usuarios %}
-    <tr>
-      <td>{{ usuario.username }}</td>
-      <td>{{ usuario.email }}</td>
-      <td>{{ usuario.role.name }}</td>
-    </tr>
+      <tr>
+          <td>Lector_User</td>
+          <td>lector@example.com</td>
+          <td>Lector</td>
+      </tr>
+      <tr>
+          <td>Biblio_User</td>
+          <td>bibliotecario@example.com</td>
+          <td>Bibliotecario</td>
+      </tr>
+      <tr>
+          <td>Admin_User</td>
+          <td>admin@example.com</td>
+          <td>Admin</td>
+      </tr>
     {% endfor %}
   </tbody>
 </table>
