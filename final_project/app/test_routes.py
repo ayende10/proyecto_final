@@ -12,15 +12,15 @@ def index():
     return '<h1>Corriendo en Modo de Prueba.</h1>'
 
 @main.route('/libro', methods=['GET'])
-def listar_libros():
+def listar_libro():
     """ 
     Retorna una lista de libros en formato JSON. 
     """
-    libros = Libro.query.all()
+    libro = Libro.query.all()
 
     data = [
         {'id': libro.id, 'titulo': libro.titulo, 'descripcion': libro.descripcion, 'bibliotecario_id': libro.bibliotecario_id}
-        for libro in libros
+        for libro in libro
     ]
     return jsonify(data), 200
 
