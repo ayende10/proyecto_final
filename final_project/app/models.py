@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
     # Relación con cursos (si es profesor)
-    Libro = db.relationship('libro', backref='bibliotecario', lazy=True)
+    libro = db.relationship('Libro', backref='bibliotecario', lazy=True)
 
     def set_password(self, password: str):
         """
@@ -53,4 +53,6 @@ class Libro(db.Model):
     categoria = db.Column(db.String(50), nullable=False)
     estado = db.Column(db.String(50), nullable=False)
     anio_publicacion = db.Column(db.Integer, nullable=False)
-    bibliotecario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    bibliotecario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    bibliotecario = db.relationship('User', backref='libros', lazy=True)

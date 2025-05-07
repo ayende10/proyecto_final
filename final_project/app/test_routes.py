@@ -1,22 +1,23 @@
 from flask import Blueprint, request, jsonify
-from flask_login import login_required, current_user
 from app.models import db, Libro
 
-# Blueprint para pruebas con libros
+# Blueprint solo con endpoints de prueba para cursos
 main = Blueprint('main', __name__)
 
-@main.route('/')  
+@main.route('/') # Ambas rutas llevan al mismo lugar
 @main.route('/dashboard')
 def index():
-    """ Página de inicio pública. """
+    """
+    Página de inicio pública (home).
+    """
     return '<h1>Corriendo en Modo de Prueba.</h1>'
 
-@main.route('/libro', methods=['GET'])
-def listar_libro():
-    """ 
-    Retorna una lista de libros en formato JSON. 
+@main.route('/libros', methods=['GET'])
+def listar_cursos():
     """
-    libro = Libro.query.all()
+    Retorna una lista de cursos (JSON).
+    """
+    libro = libro.query.all()
 
     data = [
         {'id': libro.id, 'titulo': libro.titulo, 'descripcion': libro.descripcion, 'bibliotecario_id': libro.bibliotecario_id}
@@ -24,12 +25,13 @@ def listar_libro():
     ]
     return jsonify(data), 200
 
-@main.route('/libro/<int:id>', methods=['GET'])
+
+@main.route('/libros/<int:id>', methods=['GET'])
 def listar_un_libro(id):
-    """ 
-    Retorna un solo libro por su ID en formato JSON. 
     """
-    libro = Libro.query.get_or_404(id)
+    Retorna un solo libro por su ID (JSON).
+    """
+    libro = libro.query.get_or_404(id)
 
     data = {
         'id': libro.id,
@@ -40,53 +42,52 @@ def listar_un_libro(id):
 
     return jsonify(data), 200
 
-@main.route('/libro', methods=['POST'])
-@login_required
-def crear_libro():
-    """ 
-    Crea un libro con validación de usuario. Solo Admins o Bibliotecarios pueden crear. 
-    """
-    if current_user.role.name not in ['Admin', 'Bibliotecario']:
-        return jsonify({'error': 'No tienes permisos para crear un libro.'}), 403
 
+@main.route('/libros', methods=['POST'])
+def crear_libro():
+    """
+    Crea un libro sin validación.
+    Espera JSON con 'titulo', 'descripcion' y 'bibliotecario_id'.
+    """
     data = request.get_json()
+
     if not data:
         return jsonify({'error': 'No input data provided'}), 400
 
-    libro = Libro(
+    libro = libro(
         titulo=data.get('titulo'),
         descripcion=data.get('descripcion'),
-        bibliotecario_id=current_user.id
+        bibliotecario_id=data.get('bibliotecario_id')  # sin validación de usuario
     )
 
     db.session.add(libro)
     db.session.commit()
 
-    return jsonify({'message': '📖 Libro creado exitosamente.', 'id': libro.id}), 201
+    return jsonify({'message': 'Libro creado', 'id': libro.id, 'bibliotecario_id': libro.bibliotecario_id}), 201
 
-@main.route('/libro/<int:id>', methods=['PUT'])
-@login_required
+@main.route('/libros/<int:id>', methods=['PUT'])
 def actualizar_libro(id):
-    """ 
-    Actualiza un libro. Solo Admins o Bibliotecarios con permisos pueden modificar. 
     """
-    libro = Libro.query.get_or_404(id)
-
-    if current_user.role.name not in ['Admin', 'Bibliotecario'] and libro.bibliotecario_id != current_user.id:
-        return jsonify({'error': 'No tienes permiso para actualizar este libro.'}), 403
-
+    Actualiza un libro sin validación de usuario o permisos.
+    """
+    libro = libro.query.get_or_404(id)
     data = request.get_json()
+
     libro.titulo = data.get('titulo', libro.titulo)
     libro.descripcion = data.get('descripcion', libro.descripcion)
-    libro.bibliotecario_id = data.get('bibliotecario_id', libro.bibliotecario_id)
+    libro.profesor_id = data.get('bibliotecario_id', libro.bibliotecario_id)
 
     db.session.commit()
 
-    return jsonify({'message': '📖 Libro actualizado correctamente.', 'id': libro.id}), 200
+    return jsonify({'message': 'Libro actualizado', 'id': libro.id}), 200
 
-@main.route('/libro/<int:id>', methods=['DELETE'])
-@login_required
+@main.route('/libros/<int:id>', methods=['DELETE'])
 def eliminar_libro(id):
-    """ 
-    Elimina un libro. 
     """
+    Elimina un libro sin validación de permisos.
+    """
+    libro = libro.query.get_or_404(id)
+    db.session.delete(libro)
+    db.session.commit()
+
+    return jsonify({'message': 'Libro eliminado', 'id': libro.id}), 200
