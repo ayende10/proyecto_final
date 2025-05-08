@@ -29,12 +29,6 @@ Book" }}{% endblock %} {% block content %}
     form.categoria(class="form-control", placeholder="Enter the book's category") }}
   </div>
 
-  <!-- Book Description -->
-  <div class="mb-3">
-    {{ form.descripcion.label(class="form-label") }} {{
-    form.descripcion(class="form-control", placeholder="Enter book
-    description") }}
-  </div>
 
   <!-- Book Status -->
   <div class="mb-3">
@@ -44,8 +38,8 @@ Book" }}{% endblock %} {% block content %}
 
   <!-- Book Published -->
   <div class="mb-3">
-    {{ form.publicacion.label(class="form-label") }} {{
-    form.publicacion(class="form-control", placeholder="Enter the book's published year") }}
+    {{ form.anio_publicacion.label(class="form-label") }} {{
+    form.anio_publicacion(class="form-control", placeholder="Enter the book's published year") }}
   </div>
 
   <!-- Submit Button -->

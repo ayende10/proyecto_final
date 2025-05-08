@@ -2,6 +2,7 @@ from app import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 # Carga un usuario desde su ID, necesario para el sistema de sesiones de Flask-Login
 @login_manager.user_loader
 def load_user(user_id):
@@ -53,6 +54,7 @@ class Libro(db.Model):
     categoria = db.Column(db.String(50), nullable=False)
     estado = db.Column(db.String(50), nullable=False)
     anio_publicacion = db.Column(db.Integer, nullable=False)
+
+    bibliotecario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    bibliotecario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    bibliotecario = db.relationship('User', backref='libros', lazy=True)
+    

@@ -48,7 +48,7 @@ def dashboard():
 
 @main.route('/libros', methods=['GET', 'POST'])
 @login_required
-def cursos():
+def libro():
     """
     Permite crear un nuevo libros. Solo disponible para bibliotecarios o admins.
     """
