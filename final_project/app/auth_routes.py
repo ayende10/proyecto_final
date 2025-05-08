@@ -15,7 +15,7 @@ def login():
 
     # Procesamiento del formulario si es enviado correctamente
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data)
 
         # Verifica si el usuario existe y la contraseña es válida
         if user and user.check_password(form.password.data):

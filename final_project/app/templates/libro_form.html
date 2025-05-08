@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block title %}{{ editar and "Edit Book" or "New
 Book" }}{% endblock %} {% block content %}
-<h2 class="mb-4">{{ editar and "Edit Course" or "New Course" }}</h2>
+<h2 class="mb-4">{{ editar and "Edit Book" or "New Book" }}</h2>
 
 <form method="POST" novalidate>
   {{ form.hidden_tag() }}

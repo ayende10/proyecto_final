@@ -54,7 +54,7 @@ def cursos():
     """
     form = LibroForm()
     if form.validate_on_submit():
-        libro = libro(
+        libro = Libro(
             titulo=form.titulo.data,
             descripcion=form.descripcion.data,
             bibliotecario_id=current_user.id

@@ -13,9 +13,9 @@ def index():
     return '<h1>Corriendo en Modo de Prueba.</h1>'
 
 @main.route('/libros', methods=['GET'])
-def listar_cursos():
+def listar_libro():
     """
-    Retorna una lista de cursos (JSON).
+    Retorna una lista de libros (JSON).
     """
     libro = libro.query.all()
 

@@ -28,9 +28,9 @@ content %}
     <tr>
       <td>{{ libro.titulo }}</td>
       <td>{{ libro.descripcion }}</td>
-      <td>{{ curso.biblioteacrio.username }}</td>
+      <td>{{ libro.biblioteacrio.username }}</td>
       <td class="text-center ps-0 pe-0">
-        {% if current_user.role.name == 'Admin' or curso.bibliotecario_id ==
+        {% if current_user.role.name == 'Admin' or libro.bibliotecario_id ==
         current_user.id %}
 
         <a
