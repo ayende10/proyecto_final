@@ -50,14 +50,18 @@ def dashboard():
 @login_required
 def libro():
     """
-    Permite crear un nuevo libros. Solo disponible para bibliotecarios o admins.
+    Permite crear un nuevo libro. Solo disponible para bibliotecarios o admins.
     """
     form = LibroForm()
     if form.validate_on_submit():
         libro = Libro(
             titulo=form.titulo.data,
-            descripcion=form.descripcion.data,
-            bibliotecario_id=current_user.id
+            autor=form.autor.data,
+            isbn=form.isbn.data,
+            categoria=form.categoria.data,
+            estado=form.estado.data,
+            anio_publicaion=form.anio_publicacion.data
+        
         )
         db.session.add(libro)
         db.session.commit()

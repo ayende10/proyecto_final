@@ -18,17 +18,22 @@ content %}
   <thead class="table-light">
     <tr>
       <th>Title</th>
-      <th>Description</th>
+      <th>Author</th>
+      <th>Category</th>
       <th>Uploader</th>
-      <th class="text-center">Actions</th>
+      <th>Status</th>
+      <th>Year</th>
     </tr>
   </thead>
   <tbody>
     {% for libro in libro %}
     <tr>
       <td>{{ libro.titulo }}</td>
-      <td>{{ libro.descripcion }}</td>
-      <td>{{ libro.bibliotecario.username }}</td>
+      <td>{{libro.autor}}</td>
+      <td>{{ libro.categoria }}</td>
+      <td>{{ libro.user.username }}</td>
+      <td>{{libro.status}}</td>
+      <td>{{libro.anio_publicacion}}</td>
       <td class="text-center ps-0 pe-0">
         {% if current_user.role.name == 'Admin' or libro.bibliotecario_id ==
         current_user.id %}
