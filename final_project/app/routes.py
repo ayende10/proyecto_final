@@ -60,7 +60,8 @@ def libro():
             isbn=form.isbn.data,
             categoria=form.categoria.data,
             estado=form.estado.data,
-            anio_publicaion=form.anio_publicacion.data
+            anio_publicacion=form.anio_publicacion.data
+
         
         )
         db.session.add(libro)

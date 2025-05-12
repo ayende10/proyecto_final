@@ -1,3 +1,4 @@
+-- Active: 1746552253366@@127.0.0.1@3306
 DROP DATABASE IF EXISTS gestor_biblioteca;
 CREATE DATABASE gestor_biblioteca CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE gestor_biblioteca;
