@@ -74,7 +74,7 @@ def actualizar_libro(id):
     data = request.get_json()
 
     libro.titulo = data.get('titulo', libro.titulo)
-    libro.autor = data.get('autor', libro.descripcion)
+    libro.autor = data.get('autor', libro.autor)
     libro.profesor_id = data.get('bibliotecario_id', libro.bibliotecario_id)
 
     db.session.commit()

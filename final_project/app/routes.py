@@ -39,12 +39,12 @@ def dashboard():
     """
     Panel principal del usuario. Muestra los libros si no es lector.
     """
-    if current_user.role.name == 'Lector': # Change this for your project
-        libro = Libro.query.all()
+    if current_user.role.name in ['Admin', 'Lector', 'Bibliotecario']:
+        libros = Libro.query.all()
     else:
-        libro = Libro.query.filter_by(bibliotecario_id=current_user.id).all()
+        libros = []
 
-    return render_template('dashboard.html', libro=libro)
+    return render_template('dashboard.html', libros=libros)
 
 @main.route('/libros', methods=['GET', 'POST'])
 @login_required
@@ -79,22 +79,28 @@ def editar_libro(id):
     """
     libro = Libro.query.get_or_404(id)
 
-    # Validación de permisos
-    if current_user.role.name not in ['Admin', 'Bibliotecario'] or (
-        libro.bibliotecario_id != current_user.id and current_user.role.name != 'Admin'):
-        flash('You do not have permission to edit this course.')  # 🔁 Traducido
+    # Validación de permisos:
+    # El admin puede editar cualquier libro.
+    # El bibliotecario solo puede editar los libros que él mismo ha creado (libro.bibliotecario_id == current_user.id).
+    if current_user.role.name == 'Admin' or libro.bibliotecario_id == current_user.id:
+        form = LibroForm(obj=libro)
+
+        if form.validate_on_submit():
+            libro.titulo = form.titulo.data
+            libro.autor = form.autor.data
+            libro.isbn = form.isbn.data
+            libro.categoria = form.categoria.data
+            libro.estado = form.estado.data
+            libro.año_publicacion = form.año_publicacion.data
+
+            db.session.commit()
+            flash("Book updated successfully.")  # 🔁 Traducido
+            return redirect(url_for('main.dashboard'))
+        
+        return render_template('libro_form.html', form=form, editar=True)
+    else:
+        flash('You do not have permission to edit this book.')  # 🔁 Traducido
         return redirect(url_for('main.dashboard'))
-
-    form = LibroForm(obj=libro)
-
-    if form.validate_on_submit():
-        libro.titulo = form.titulo.data
-        libro.descripcion = form.descripcion.data
-        db.session.commit()
-        flash("Book updated successfully.")  # 🔁 Traducido
-        return redirect(url_for('main.dashboard'))
-
-    return render_template('libro_form.html', form=form, editar=True)
 
 @main.route('/libros/<int:id>/eliminar', methods=['POST'])
 @login_required
@@ -104,9 +110,11 @@ def eliminar_libro(id):
     """
     libro = Libro.query.get_or_404(id)
 
+    # Validación de permisos: El admin puede eliminar cualquier libro.
+    # El bibliotecario solo puede eliminar los libros que él mismo ha creado.
     if current_user.role.name not in ['Admin', 'Bibliotecario'] or (
         libro.bibliotecario_id != current_user.id and current_user.role.name != 'Admin'):
-        flash('You do not have permission to delete this course.')  # 🔁 Traducido
+        flash('You do not have permission to delete this book.')  # 🔁 Traducido
         return redirect(url_for('main.dashboard'))
 
     db.session.delete(libro)
