@@ -53,8 +53,8 @@ class Libro(db.Model):
     isbn = db.Column(db.String(20), nullable=False)
     categoria = db.Column(db.String(50), nullable=False)
     estado = db.Column(db.String(50), nullable=False)
-    anio_publicacion = db.Column(db.Integer, nullable=False)
+    año_publicacion = db.Column(db.Integer, nullable=False)
 
     bibliotecario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
+    user=db.relationship('User', backref='libros')
     

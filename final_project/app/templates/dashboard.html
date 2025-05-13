@@ -19,8 +19,8 @@ content %}
     <tr>
       <th>Title</th>
       <th>Author</th>
+      <th>ISBN</th>
       <th>Category</th>
-      <th>Uploader</th>
       <th>Status</th>
       <th>Year</th>
     </tr>
@@ -30,10 +30,10 @@ content %}
     <tr>
       <td>{{ libro.titulo }}</td>
       <td>{{libro.autor}}</td>
-      <td>{{ libro.categoria }}</td>
-      <td>{{ libro.user.username }}</td>
-      <td>{{libro.status}}</td>
-      <td>{{libro.anio_publicacion}}</td>
+      <td>{{libro.isbn}}</td>
+      <td>{{libro.categoria }}</td>
+      <td>{{libro.estado}}</td>
+      <td>{{libro.año_publicacion}}</td>
       <td class="text-center ps-0 pe-0">
         {% if current_user.role.name == 'Admin' or libro.bibliotecario_id ==
         current_user.id %}

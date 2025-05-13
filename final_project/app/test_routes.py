@@ -20,7 +20,7 @@ def listar_libro():
     libro = libro.query.all()
 
     data = [
-        {'id': libro.id, 'titulo': libro.titulo, 'descripcion': libro.descripcion, 'bibliotecario_id': libro.bibliotecario_id}
+        {'id': libro.id, 'titulo': libro.titulo, 'autor': libro.autor, 'bibliotecario_id': libro.bibliotecario_id}
         for libro in libro
     ]
     return jsonify(data), 200
@@ -36,7 +36,7 @@ def listar_un_libro(id):
     data = {
         'id': libro.id,
         'titulo': libro.titulo,
-        'descripcion': libro.descripcion,
+        'autor': libro.autor,
         'bibliotecario_id': libro.bibliotecario_id
     }
 
@@ -47,7 +47,7 @@ def listar_un_libro(id):
 def crear_libro():
     """
     Crea un libro sin validación.
-    Espera JSON con 'titulo', 'descripcion' y 'bibliotecario_id'.
+    Espera JSON con 'titulo', 'autor' y 'bibliotecario_id'.
     """
     data = request.get_json()
 
@@ -56,7 +56,7 @@ def crear_libro():
 
     libro = libro(
         titulo=data.get('titulo'),
-        descripcion=data.get('descripcion'),
+        autor=data.get('autor'),
         bibliotecario_id=data.get('bibliotecario_id')  # sin validación de usuario
     )
 
@@ -74,7 +74,7 @@ def actualizar_libro(id):
     data = request.get_json()
 
     libro.titulo = data.get('titulo', libro.titulo)
-    libro.descripcion = data.get('descripcion', libro.descripcion)
+    libro.autor = data.get('autor', libro.descripcion)
     libro.profesor_id = data.get('bibliotecario_id', libro.bibliotecario_id)
 
     db.session.commit()

@@ -60,7 +60,7 @@ def libro():
             isbn=form.isbn.data,
             categoria=form.categoria.data,
             estado=form.estado.data,
-            anio_publicacion=form.anio_publicacion.data
+            año_publicacion=form.año_publicacion.data
 
         
         )

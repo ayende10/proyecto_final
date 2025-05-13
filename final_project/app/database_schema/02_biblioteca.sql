@@ -24,7 +24,7 @@ CREATE TABLE libro (
     isbn VARCHAR(20),
     categoria VARCHAR(50),
     estado ENUM('Disponible', 'Prestado'),
-    anio_publicacion INT
+    año_publicacion INT
 );
 
 INSERT INTO role (name) VALUES ('Admin'), ('Bibliotecario'), ('Lector');
