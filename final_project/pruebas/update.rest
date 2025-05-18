@@ -1,11 +1,11 @@
-### Editar un curso (POST)
+### Editar un libro (POST)
 
-# Simular POST con nuevos datos del curso
+# Simular POST con nuevos datos del libro
 
-PUT http://localhost:5000/cursos/4
+PUT http://localhost:5000/libro/11
 Content-Type: application/json
 
 {
-  "titulo": "Curso actualizado",
-  "descripcion": "Nueva descripción actualizada"
+  "titulo": "Generaciones de Flask",
+  "autor": "Juan Perez"
 }

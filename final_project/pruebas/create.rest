@@ -1,10 +1,10 @@
-### Crear un nuevo curso (POST)
+### Crear un nuevo libro (POST)
 
-POST http://localhost:5000/cursos
+POST http://127.0.0.1:5000/libro
 Content-Type: application/json
 
 {
   "titulo": "Flask Avanzado",
-  "descripcion": "Curso intensivo de desarrollo con Flask",
-  "profesor_id": 1
+  "autor": "Juan Perez",
+  "bibliotecario_id": 1
 }
