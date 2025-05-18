@@ -55,15 +55,14 @@ def libro():
     form = LibroForm()
     if form.validate_on_submit():
         libro = Libro(
-            titulo=form.titulo.data,
-            autor=form.autor.data,
-            isbn=form.isbn.data,
-            categoria=form.categoria.data,
-            estado=form.estado.data,
-            año_publicacion=form.año_publicacion.data
-
-        
-        )
+        titulo=form.titulo.data,
+        autor=form.autor.data,
+        isbn=form.isbn.data,
+        categoria=form.categoria.data,
+        estado=form.estado.data,
+        año_publicacion=form.año_publicacion.data,
+        bibliotecario_id=current_user.id  
+    )
         db.session.add(libro)
         db.session.commit()
         flash("Book created successfully.")  # 🔁 Traducido

@@ -35,7 +35,7 @@ content %}
       <td>{{libro.estado}}</td>
       <td>{{libro.año_publicacion}}</td>
       <td class="text-center ps-0 pe-0">
-        {% if current_user.role.name == 'Admin' or libro.bibliotecario_id ==
+        {% if current_user.role.name == 'Admin' or libro.bibliotecario ==
         current_user.id %}
 
         <a

@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(256), nullable=False)  # Asegura suficiente espacio para el hash
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
-    # Relación con cursos (si es profesor)
+    # Relación con libros (si es bibliotecario)
     libro = db.relationship('Libro', backref='bibliotecario', lazy=True)
 
     def set_password(self, password: str):
@@ -43,7 +43,7 @@ class User(UserMixin, db.Model):
         """
         return check_password_hash(self.password_hash, password)
 
-# Modelo de curso asociado a un profesor
+# Modelo de libros 
 class Libro(db.Model):
     __tablename__ = 'libro'
 
