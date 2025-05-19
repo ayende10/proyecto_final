@@ -19,21 +19,21 @@ with app.app_context():
     # Diccionario con usuarios a insertar
     users_data = [
         {
-            "username": "Administrator",
-            "email": "admin@example.com",
+            "username": "dastas",
+            "email": "dastas@example.com",
             "password": "admin123",
             "role_name": "Admin"
         },
         {
-            "username": "John Doe",
-            "email": "biblio@example.com",
-            "password": "biblio123",
+            "username": "john",
+            "email": "john@example.com",
+            "password": "john123",
             "role_name": "Bibliotecario"
         },
         {
-            "username": "Steve Jobs",
-            "email": "lector@example.com",
-            "password": "lector123",
+            "username": "prueba final",
+            "email": "pruebafinal@example.com",
+            "password": "pruebafinal",
             "role_name": "Lector"
         }
     ]
