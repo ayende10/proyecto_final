@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from raiz_del_proyecto.config import Config
+from config import Config 
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -14,8 +14,8 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-    #from app.routes import main 
-    from app.test_routes import main
+    from app.routes import main 
+    #from app.test_routes import main
     
     from app.auth_routes import auth
 
