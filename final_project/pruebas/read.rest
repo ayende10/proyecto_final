@@ -1,4 +1,4 @@
 ### Obtener todos los libros (GET)
 
-GET http://127.0.0.1:5000/libro
+GET http://127.0.0.1:5000/listar_libro
 Content-Type: application/json

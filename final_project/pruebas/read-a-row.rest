@@ -1,4 +1,4 @@
 ### Obtener libro por ID (GET)
 
-GET http://127.0.0.1:5000//libro/11
+GET http://127.0.0.1:5000//libro/14
 Content-Type: application/json

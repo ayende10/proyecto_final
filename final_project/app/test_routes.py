@@ -12,7 +12,7 @@ def index():
     """
     return '<h1>Corriendo en Modo de Prueba.</h1>'
 
-@main.route('/libro', methods=['GET'])
+@main.route('/listar_libro', methods=['GET'])
 def listar_libro():
     """
     Retorna una lista de libros (JSON).
@@ -20,7 +20,8 @@ def listar_libro():
     libro = Libro.query.all()
 
     data = [
-        {'id': libro.id, 'titulo': libro.titulo, 'autor': libro.autor, 'bibliotecario_id': libro.bibliotecario_id}
+        {'id': libro.id, 'titulo': libro.titulo, 'autor': libro.autor, 'isbn': libro.isbn, 'categoria': libro.categoria, 
+         'estado': libro.estado, 'año_publicacion': libro.año_publicacion, 'bibliotecario_id': libro.bibliotecario_id}
         for libro in libro
     ]
     return jsonify(data), 200
@@ -37,13 +38,17 @@ def listar_un_libro(id):
         'id': libro.id,
         'titulo': libro.titulo,
         'autor': libro.autor,
+        'isbn': libro.isbn,
+        'categoria': libro.categoria,
+        'estado': libro.estado,
+        'año_publicacion': libro.año_publicacion,
         'bibliotecario_id': libro.bibliotecario_id
     }
 
     return jsonify(data), 200
 
 
-@main.route('/libro', methods=['POST'])
+@main.route('/crear_libro', methods=['POST'])
 def crear_libro():
     """
     Crea un libro sin validación.
@@ -57,6 +62,10 @@ def crear_libro():
     nuevo_libro = Libro(
         titulo=data.get('titulo'),
         autor=data.get('autor'),
+        isbn=data.get('isbn'),
+        categoria=data.get('categoria'),
+        estado=data.get('estado'),
+        año_publicacion=data.get('año_publicacion'),
         bibliotecario_id=data.get('bibliotecario_id')  # sin validación de usuario
     )
 
@@ -65,7 +74,7 @@ def crear_libro():
 
     return jsonify({'message': 'Libro creado', 'id': nuevo_libro.id, 'bibliotecario_id': nuevo_libro.bibliotecario_id}), 201
 
-@main.route('/libro/<int:id>', methods=['PUT'])
+@main.route('/actualizar_libro/<int:id>', methods=['PUT'])
 def actualizar_libro(id):
     """
     Actualiza un libro sin validación de usuario o permisos.
@@ -75,13 +84,17 @@ def actualizar_libro(id):
 
     libro.titulo = data.get('titulo', libro.titulo)
     libro.autor = data.get('autor', libro.autor)
+    libro.isbn = data.get('isbn', libro.isbn)
+    libro.categoria = data.get('categoria', libro.categoria)
+    libro.estado = data.get('estado', libro.estado)
+    libro.año_publicacion = data.get('año_publicacion', libro.año_publicacion)
     libro.bibliotecario_id = data.get('bibliotecario_id', libro.bibliotecario_id)
 
     db.session.commit()
 
     return jsonify({'message': 'Libro actualizado', 'id': libro.id}), 200
 
-@main.route('/libro/<int:id>', methods=['DELETE'])
+@main.route('/eliminar_libro/<int:id>', methods=['DELETE'])
 def eliminar_libro(id):
     """
     Elimina un libro sin validación de permisos.

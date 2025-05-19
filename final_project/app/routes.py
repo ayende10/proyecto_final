@@ -110,7 +110,7 @@ def eliminar_libro(id):
     libro = Libro.query.get_or_404(id)
 
     # Validación de permisos: El admin puede eliminar cualquier libro.
-    # El bibliotecario solo puede eliminar los libros que él mismo ha creado.
+    
     if current_user.role.name not in ['Admin', 'Bibliotecario'] or (
         libro.bibliotecario_id != current_user.id and current_user.role.name != 'Admin'):
         flash('You do not have permission to delete this book.')  # 🔁 Traducido

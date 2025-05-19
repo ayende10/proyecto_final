@@ -1,6 +1,6 @@
 ### Eliminar libro (POST)
 
-DELETE http://localhost:5000/libro/11
+DELETE http://localhost:5000/eliminar_libro/14
 Content-Type: application/json
 
 

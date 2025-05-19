@@ -1,10 +1,14 @@
 ### Crear un nuevo libro (POST)
 
-POST http://127.0.0.1:5000/libro
+POST http://127.0.0.1:5000/crear_libro
 Content-Type: application/json
 
 {
   "titulo": "Flask Avanzado",
   "autor": "Juan Perez",
+  "isbn": "978-3-16-148410-0",
+  "categoria": "Tecnologia",
+  "estado": "disponible",
+  "año_publicacion": "2023",
   "bibliotecario_id": 1
 }

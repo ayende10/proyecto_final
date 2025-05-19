@@ -2,10 +2,10 @@
 
 # Simular POST con nuevos datos del libro
 
-PUT http://localhost:5000/libro/11
+PUT http://localhost:5000/actualizar_libro/14
 Content-Type: application/json
 
 {
   "titulo": "Generaciones de Flask",
-  "autor": "Juan Perez"
+  "autor": "Maria Lopez"
 }
